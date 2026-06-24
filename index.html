@@ -1,910 +1,1463 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIMETRÍA CONCE · Muebles en melamina a medida</title>
-<meta name="description" content="Diseñamos, cortamos y armamos muebles en melamina a medida. Cocinas, closets y muebles de living con precisión de taller en la periferia de Concepción, Chile.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #181209;
-    --bg-alt: #1f1810;
-    --surface: #261d12;
-    --surface-2: #2c2215;
-    --oak: #c9893f;
-    --oak-light: #e3ad6c;
-    --bone: #f3ecdd;
-    --bone-dim: #cbc0a9;
-    --ink: #15110a;
-    --blueprint: #7fa3ad;
-    --line: rgba(243,236,221,0.12);
-    --line-strong: rgba(243,236,221,0.22);
-    --font-display: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-    --maxw: 1180px;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Diseñamos, cortamos y armamos muebles en melamina a medida. Cocinas, closets y muebles de living con precisión de taller en Chillán Viejo, Región de Ñuble." />
+  <title>SIMETRÍA CONCE · Muebles en melamina a medida</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --ink:        #1a1612;
+      --ink-soft:   #3d352d;
+      --sand:       #f5f0e8;
+      --sand-dark:  #e8e0d0;
+      --grain:      #c8b89a;
+      --grain-light:#ddd0b8;
+      --cut:        #8b6914;   /* golden saw-cut accent */
+      --cut-light:  #b8891a;
+      --white:      #fdfaf5;
+      --muted:      #7a6e62;
 
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg);
-    color:var(--bone);
-    font-family:var(--font-body);
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  img{max-width:100%; display:block;}
-  a{color:inherit; text-decoration:none;}
-  ul{list-style:none;}
-  button{font-family:inherit; cursor:pointer;}
+      --f-display: 'DM Serif Display', Georgia, serif;
+      --f-body:    'DM Sans', system-ui, sans-serif;
+      --f-mono:    'Space Mono', monospace;
 
-  ::selection{background:var(--oak); color:var(--ink);}
+      --r: 3px;
+      --gap: clamp(1.5rem, 4vw, 3rem);
+      --section-pad: clamp(5rem, 10vw, 9rem);
+      --max-w: 1200px;
+    }
 
-  :focus-visible{
-    outline:2px solid var(--oak-light);
-    outline-offset:3px;
-  }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .wrap{
-    max-width:var(--maxw);
-    margin:0 auto;
-    padding:0 28px;
-  }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
-  .eyebrow{
-    font-family:var(--font-mono);
-    font-size:12.5px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--oak-light);
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:18px; height:1px;
-    background:var(--oak-light);
-    display:inline-block;
-  }
+    body {
+      font-family: var(--f-body);
+      background: var(--white);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
-  h1,h2,h3{
-    font-family:var(--font-display);
-    font-weight:600;
-    letter-spacing:-0.01em;
-    color:var(--bone);
-  }
+    /* ── UTILITY ─────────────────────────────────────────── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3rem); }
+    .eyebrow {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cut);
+    }
 
-  /* ===== NAV ===== */
-  header{
-    position:fixed; top:0; left:0; right:0;
-    z-index:200;
-    background:linear-gradient(to bottom, rgba(24,18,9,0.92), rgba(24,18,9,0));
-    backdrop-filter:blur(2px);
-  }
-  .navbar{
-    max-width:var(--maxw);
-    margin:0 auto;
-    padding:22px 28px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
-  .logo{
-    display:flex; align-items:center; gap:10px;
-    font-family:var(--font-display);
-    font-weight:700;
-    font-size:19px;
-    letter-spacing:0.02em;
-    color:var(--bone);
-  }
-  .logo svg{width:26px; height:26px;}
+    /* ── NAV ─────────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(253, 250, 245, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .nav.scrolled {
+      border-color: var(--grain-light);
+      box-shadow: 0 2px 24px rgba(26,22,18,0.06);
+    }
+    .nav__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+    }
+    .nav__logo {
+      font-family: var(--f-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav__logo-mark {
+      width: 28px; height: 28px;
+      background: var(--ink);
+      display: grid; place-items: center;
+      flex-shrink: 0;
+    }
+    .nav__logo-mark svg { width: 14px; height: 14px; fill: var(--white); }
 
-  .hamburger{
-    width:48px; height:48px;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:6px;
-    background:transparent;
-    border:1px solid var(--line-strong);
-    border-radius:999px;
-    transition:border-color .25s ease, background .25s ease;
-  }
-  .hamburger:hover{ border-color:var(--oak); }
-  .hamburger span{
-    width:18px; height:1.5px;
-    background:var(--bone);
-    transition:transform .35s cubic-bezier(.65,0,.35,1), opacity .25s ease, width .25s ease;
-  }
-  .hamburger.open span:nth-child(1){ transform:translateY(7.5px) rotate(45deg); }
-  .hamburger.open span:nth-child(2){ opacity:0; }
-  .hamburger.open span:nth-child(3){ transform:translateY(-7.5px) rotate(-45deg); }
+    .nav__links {
+      display: flex; align-items: center; gap: clamp(1rem, 2.5vw, 2.5rem);
+      list-style: none;
+    }
+    .nav__links a {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav__links a:hover { color: var(--cut); }
 
-  /* ===== OVERLAY MENU ===== */
-  .menu-overlay{
-    position:fixed; inset:0;
-    z-index:190;
-    background:var(--ink);
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:48px 48px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:120px 28px 60px;
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(-12px);
-    transition:opacity .45s ease, transform .45s ease, visibility 0s linear .45s;
-  }
-  .menu-overlay.open{
-    opacity:1; visibility:visible; transform:translateY(0);
-    transition:opacity .45s ease, transform .45s ease;
-  }
-  .menu-inner{ max-width:var(--maxw); margin:0 auto; width:100%; display:flex; gap:64px; flex-wrap:wrap; justify-content:space-between;}
-  .menu-links{ display:flex; flex-direction:column; }
-  .menu-links a{
-    font-family:var(--font-display);
-    font-size:clamp(34px, 7vw, 64px);
-    font-weight:600;
-    color:var(--bone-dim);
-    padding:10px 0;
-    border-bottom:1px solid var(--line);
-    display:flex;
-    align-items:baseline;
-    gap:18px;
-    transition:color .25s ease, padding-left .25s ease;
-  }
-  .menu-links a .num{
-    font-family:var(--font-mono);
-    font-size:14px;
-    color:var(--oak);
-  }
-  .menu-links a:hover{ color:var(--bone); padding-left:14px;}
-  .menu-side{
-    display:flex; flex-direction:column; justify-content:flex-end; gap:18px;
-    min-width:220px;
-  }
-  .menu-side p{ color:var(--bone-dim); font-size:14.5px;}
-  .menu-side .mono{ font-family:var(--font-mono); color:var(--oak-light); font-size:13px; letter-spacing:.04em;}
+    .nav__cta {
+      background: var(--ink);
+      color: var(--white) !important;
+      padding: 0.5rem 1.1rem;
+      transition: background 0.2s !important;
+    }
+    .nav__cta:hover { background: var(--cut) !important; color: var(--white) !important; }
 
-  /* ===== HERO ===== */
-  .hero{
-    position:relative;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    padding:140px 0 80px;
-    background:
-      radial-gradient(ellipse 900px 500px at 85% 18%, rgba(201,137,63,0.12), transparent 60%),
-      var(--bg);
-  }
-  .hero .wrap{
-    display:grid;
-    grid-template-columns:1.05fr 0.95fr;
-    gap:40px;
-    align-items:center;
-  }
-  .hero h1{
-    font-size:clamp(38px, 5.4vw, 70px);
-    line-height:1.04;
-    margin:18px 0 24px;
-  }
-  .hero h1 em{
-    font-style:normal;
-    color:var(--oak-light);
-  }
-  .hero p.lead{
-    font-size:17px;
-    color:var(--bone-dim);
-    max-width:46ch;
-    margin-bottom:34px;
-  }
-  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:46px;}
-  .btn{
-    display:inline-flex; align-items:center; gap:10px;
-    padding:15px 26px;
-    border-radius:999px;
-    font-weight:600;
-    font-size:14.5px;
-    letter-spacing:0.01em;
-    transition:transform .25s ease, background .25s ease, border-color .25s ease;
-  }
-  .btn-primary{
-    background:var(--oak);
-    color:var(--ink);
-  }
-  .btn-primary:hover{ background:var(--oak-light); transform:translateY(-2px);}
-  .btn-ghost{
-    border:1px solid var(--line-strong);
-    color:var(--bone);
-  }
-  .btn-ghost:hover{ border-color:var(--oak); transform:translateY(-2px); }
+    .nav__burger {
+      display: none;
+      flex-direction: column; justify-content: center; gap: 5px;
+      width: 36px; height: 36px; cursor: pointer; background: none; border: none;
+    }
+    .nav__burger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--ink); transition: all 0.3s; transform-origin: center;
+    }
+    .nav__burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav__burger.open span:nth-child(2) { opacity: 0; }
+    .nav__burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-  .hero-stats{
-    display:flex; gap:34px;
-    padding-top:28px;
-    border-top:1px solid var(--line);
-  }
-  .hero-stats div strong{
-    display:block;
-    font-family:var(--font-display);
-    font-size:26px;
-    color:var(--bone);
-  }
-  .hero-stats div span{
-    font-family:var(--font-mono);
-    font-size:11.5px;
-    color:var(--bone-dim);
-    letter-spacing:.05em;
-    text-transform:uppercase;
-  }
+    .nav__mobile {
+      display: none;
+      position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+      background: var(--white);
+      flex-direction: column; align-items: flex-start; justify-content: center;
+      padding: 2rem clamp(1.25rem, 5vw, 3rem);
+      gap: 0.25rem;
+      z-index: 99;
+    }
+    .nav__mobile.open { display: flex; }
+    .nav__mobile a {
+      font-family: var(--f-display);
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      color: var(--ink);
+      text-decoration: none;
+      line-height: 1.2;
+      transition: color 0.2s;
+    }
+    .nav__mobile a:hover { color: var(--cut); }
 
-  /* ===== HERO SIGNATURE DIAGRAM ===== */
-  .diagram-wrap{ position:relative; }
-  .diagram-wrap svg{ width:100%; height:auto; overflow:visible; }
-  .piece{
-    transform:translate(var(--ox), var(--oy)) rotate(var(--rot,0deg));
-    opacity:0;
-    animation:assemble 1.1s cubic-bezier(.16,1,.3,1) forwards;
-    animation-delay:var(--delay);
-    transform-box:fill-box;
-    transform-origin:center;
-  }
-  @keyframes assemble{
-    0%{ transform:translate(var(--ox), var(--oy)) rotate(var(--rot,0deg)); opacity:0; }
-    55%{ opacity:1; }
-    100%{ transform:translate(0,0) rotate(0deg); opacity:1; }
-  }
-  .dim-line{
-    stroke:var(--blueprint);
-    stroke-width:1;
-    opacity:0;
-    stroke-dasharray:4 3;
-    animation:fadein .6s ease forwards;
-    animation-delay:1.5s;
-  }
-  .dim-label{
-    font-family:var(--font-mono);
-    font-size:11px;
-    fill:var(--blueprint);
-    opacity:0;
-    animation:fadein .6s ease forwards;
-    animation-delay:1.6s;
-  }
-  @keyframes fadein{ to{ opacity:1; } }
+    @media (max-width: 768px) {
+      .nav__links { display: none; }
+      .nav__burger { display: flex; }
+    }
 
-  /* ===== SECTION SHELL ===== */
-  section{ padding:120px 0; position:relative; }
-  .section-head{
-    display:flex; justify-content:space-between; align-items:flex-end;
-    gap:24px; margin-bottom:64px; flex-wrap:wrap;
-  }
-  .section-head h2{ font-size:clamp(28px, 4vw, 44px); margin-top:14px; max-width:18ch;}
-  .section-head .sub{ color:var(--bone-dim); max-width:36ch; font-size:15.5px;}
+    /* ── HERO ─────────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      padding-top: 64px;
+      background: var(--sand);
+      position: relative;
+      overflow: hidden;
+    }
 
-  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
-  .reveal.in{ opacity:1; transform:translateY(0); }
+    /* grain texture overlay */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.6;
+    }
 
-  /* ===== SERVICIOS ===== */
-  .services{ background:var(--bg-alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
-  .service-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .service-card{
-    background:var(--bg-alt);
-    padding:34px 26px 30px;
-    transition:background .3s ease;
-  }
-  .service-card:hover{ background:var(--surface); }
-  .service-card .ico{
-    width:38px; height:38px;
-    margin-bottom:22px;
-    color:var(--oak);
-  }
-  .service-card h3{ font-size:18px; margin-bottom:10px; }
-  .service-card p{ font-size:14px; color:var(--bone-dim); }
+    /* vertical cut line — the signature element */
+    .hero__cut-line {
+      position: absolute;
+      left: clamp(5rem, 12vw, 14rem);
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent 8%, var(--grain) 30%, var(--cut) 50%, var(--grain) 70%, transparent 92%);
+      opacity: 0.5;
+    }
 
-  /* ===== PROCESO ===== */
-  .process-list{ border-top:1px solid var(--line); }
-  .process-item{
-    display:grid;
-    grid-template-columns:90px 1fr 1.4fr;
-    gap:24px;
-    align-items:center;
-    padding:32px 0;
-    border-bottom:1px solid var(--line);
-  }
-  .process-item .pnum{
-    font-family:var(--font-mono);
-    font-size:13px;
-    color:var(--oak);
-  }
-  .process-item h3{ font-size:21px; }
-  .process-item p{ color:var(--bone-dim); font-size:14.5px; }
-  .process-item .bracket{
-    position:relative; width:100%; height:2px; background:var(--line);
-  }
+    .hero__body {
+      display: flex; align-items: center;
+      padding: clamp(3rem, 8vw, 6rem) 0;
+    }
 
-  /* ===== PROYECTOS ===== */
-  .gallery{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
-  }
-  .project-card{
-    position:relative;
-    border-radius:6px;
-    overflow:hidden;
-    aspect-ratio:4/5;
-    border:1px solid var(--line);
-  }
-  .project-card .swatch{
-    position:absolute; inset:0;
-  }
-  .project-card .grain{
-    position:absolute; inset:0;
-    background-image:repeating-linear-gradient(100deg, rgba(0,0,0,0.12) 0px, rgba(0,0,0,0.12) 2px, transparent 2px, transparent 7px);
-    mix-blend-mode:overlay;
-  }
-  .project-card .tag{
-    position:absolute; left:16px; top:16px;
-    font-family:var(--font-mono); font-size:11px;
-    background:rgba(21,17,10,0.55);
-    border:1px solid rgba(243,236,221,0.25);
-    color:var(--bone);
-    padding:5px 10px;
-    border-radius:999px;
-    backdrop-filter:blur(4px);
-  }
-  .project-card .meta{
-    position:absolute; left:0; right:0; bottom:0;
-    padding:22px 18px;
-    background:linear-gradient(to top, rgba(21,17,10,0.92), transparent);
-  }
-  .project-card .meta h3{ font-size:18px; margin-bottom:4px;}
-  .project-card .meta span{
-    font-family:var(--font-mono); font-size:11.5px; color:var(--oak-light);
-  }
-  .sw1{ background:linear-gradient(135deg,#caa06a,#8a6238); }
-  .sw2{ background:linear-gradient(135deg,#e9e2d4,#bdb29a); }
-  .sw3{ background:linear-gradient(135deg,#5b4631,#2c2014); }
-  .sw4{ background:linear-gradient(135deg,#9a9189,#5c564f); }
-  .sw5{ background:linear-gradient(135deg,#7c5230,#3a2415); }
-  .sw6{ background:linear-gradient(135deg,#d8c7a1,#a78e60); }
+    .hero__content {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
 
-  /* ===== MATERIALES ===== */
-  .materials{ background:var(--bg-alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
-  .mat-grid{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:16px;
-  }
-  .mat-chip{ text-align:center; }
-  .mat-chip .swatch{
-    width:100%; aspect-ratio:1/1;
-    border-radius:8px;
-    margin-bottom:12px;
-    border:1px solid var(--line-strong);
-  }
-  .mat-chip .name{ font-size:13px; color:var(--bone); font-weight:500;}
-  .mat-chip .code{ font-family:var(--font-mono); font-size:10.5px; color:var(--bone-dim);}
+    .hero__left { position: relative; }
+    .hero__eyebrow {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cut);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero__eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 2rem; height: 1px;
+      background: var(--cut);
+    }
 
-  /* ===== TESTIMONIOS ===== */
-  .testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
-  .testi-card{ background:var(--bg); padding:32px 28px; }
-  .testi-card p{ color:var(--bone-dim); font-size:15px; margin-bottom:22px; line-height:1.65;}
-  .testi-card .who{ font-family:var(--font-mono); font-size:12px; color:var(--oak-light); }
-  .stars{ color:var(--oak); font-size:14px; margin-bottom:14px; letter-spacing:2px;}
+    .hero__h1 {
+      font-family: var(--f-display);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.0;
+      color: var(--ink);
+      margin-bottom: 1.75rem;
+    }
+    .hero__h1 em {
+      font-style: italic;
+      color: var(--cut);
+    }
 
-  /* ===== CONTACTO ===== */
-  .contact{ background:var(--bg-alt); border-top:1px solid var(--line);}
-  .contact-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:60px;
-  }
-  .field{ margin-bottom:20px; }
-  .field label{
-    display:block; font-family:var(--font-mono); font-size:11.5px;
-    text-transform:uppercase; letter-spacing:.06em; color:var(--bone-dim);
-    margin-bottom:8px;
-  }
-  .field input, .field select, .field textarea{
-    width:100%;
-    background:var(--surface);
-    border:1px solid var(--line-strong);
-    border-radius:6px;
-    padding:13px 14px;
-    color:var(--bone);
-    font-family:var(--font-body);
-    font-size:14.5px;
-    transition:border-color .2s ease;
-  }
-  .field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--oak); outline:none; }
-  .field textarea{ resize:vertical; min-height:100px; }
+    .hero__desc {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      line-height: 1.7;
+      color: var(--ink-soft);
+      max-width: 44ch;
+      margin-bottom: 2.5rem;
+    }
 
-  .contact-info{ display:flex; flex-direction:column; justify-content:space-between; }
-  .info-block{ margin-bottom:28px; }
-  .info-block .eyebrow{ margin-bottom:10px; }
-  .info-block a, .info-block p{ font-size:15px; color:var(--bone); }
-  .info-block .small{ color:var(--bone-dim); font-size:13.5px; margin-top:4px;}
+    .hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-  .info-card{
-    background:var(--surface);
-    border:1px solid var(--line-strong);
-    border-radius:10px;
-    padding:26px;
-  }
-  .info-card .dim{
-    display:flex; justify-content:space-between;
-    font-family:var(--font-mono); font-size:12px; color:var(--bone-dim);
-    padding:8px 0; border-bottom:1px dashed var(--line);
-  }
-  .info-card .dim:last-child{ border-bottom:none; }
-  .info-card .dim b{ color:var(--oak-light); font-weight:500; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 1.75rem;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--ink);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--cut); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--grain);
+    }
+    .btn-secondary:hover { border-color: var(--ink); }
 
-  /* ===== FOOTER ===== */
-  footer{ padding:60px 0 40px; border-top:1px solid var(--line); }
-  .footer-top{
-    display:flex; justify-content:space-between; align-items:center;
-    flex-wrap:wrap; gap:24px; margin-bottom:40px;
-  }
-  .footer-nav{ display:flex; gap:28px; flex-wrap:wrap; }
-  .footer-nav a{ font-size:13.5px; color:var(--bone-dim); }
-  .footer-nav a:hover{ color:var(--oak-light); }
-  .footer-bottom{
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-    font-family:var(--font-mono); font-size:11.5px; color:var(--bone-dim);
-    padding-top:24px; border-top:1px solid var(--line);
-  }
+    .hero__right {
+      display: flex; flex-direction: column; gap: 1.5rem;
+    }
 
-  /* ===== RESPONSIVE ===== */
-  @media (max-width:980px){
-    .hero .wrap{ grid-template-columns:1fr; }
-    .diagram-wrap{ order:-1; max-width:380px; margin:0 auto 20px; }
-    .service-grid{ grid-template-columns:repeat(2,1fr); }
-    .gallery{ grid-template-columns:repeat(2,1fr); }
-    .mat-grid{ grid-template-columns:repeat(3,1fr); }
-    .testi-grid{ grid-template-columns:1fr; }
-    .contact-grid{ grid-template-columns:1fr; gap:40px;}
-    .process-item{ grid-template-columns:50px 1fr; }
-    .process-item .bracket{ display:none; }
-    .menu-links a{ font-size:clamp(28px,9vw,46px); }
-    .menu-inner{ gap:32px; }
-  }
-  @media (max-width:560px){
-    .service-grid{ grid-template-columns:1fr; }
-    .gallery{ grid-template-columns:1fr; }
-    .mat-grid{ grid-template-columns:repeat(2,1fr); }
-    .hero{ padding-top:120px; }
-    section{ padding:80px 0; }
-    .hero-stats{ gap:22px; flex-wrap:wrap; }
-  }
+    /* measurement card — signature element */
+    .measure-card {
+      background: var(--white);
+      border: 1px solid var(--grain-light);
+      padding: 2rem;
+      position: relative;
+    }
+    .measure-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 2rem;
+      width: 3rem; height: 2px;
+      background: var(--cut);
+    }
+    .measure-card__label {
+      font-family: var(--f-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .measure-card__value {
+      font-family: var(--f-mono);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .measure-card__unit {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-left: 0.25rem;
+    }
+    .measure-card__sub {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      margin-top: 0.5rem;
+    }
 
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.001s !important; transition-duration:0.001s !important; scroll-behavior:auto !important; }
-  }
-</style>
+    .hero__stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .stat {
+      padding: 1.25rem;
+      border: 1px solid var(--grain-light);
+      background: transparent;
+    }
+    .stat__n {
+      font-family: var(--f-mono);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .stat__label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      line-height: 1.3;
+    }
+
+    .hero__ticker {
+      background: var(--ink);
+      color: var(--white);
+      padding: 0.75rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .hero__ticker-inner {
+      display: inline-flex;
+      animation: ticker 22s linear infinite;
+    }
+    .hero__ticker span {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0 2.5rem;
+      color: var(--grain-light);
+    }
+    .hero__ticker span.accent { color: var(--cut-light); }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 900px) {
+      .hero__content { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero__cut-line { left: 2.5rem; }
+    }
+
+    /* ── SECTION SHARED ──────────────────────────────────── */
+    .section { padding: var(--section-pad) 0; }
+    .section--alt { background: var(--sand); }
+    .section--dark { background: var(--ink); color: var(--white); }
+
+    .section__header {
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .section__eyebrow { margin-bottom: 1rem; }
+    .section__title {
+      font-family: var(--f-display);
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.1;
+      max-width: 22ch;
+    }
+    .section__title em { font-style: italic; color: var(--cut); }
+    .section--dark .section__title em { color: var(--grain-light); }
+    .section__desc {
+      margin-top: 1rem;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      max-width: 60ch;
+    }
+    .section--dark .section__desc { color: var(--grain-light); }
+
+    /* ── SERVICIOS ───────────────────────────────────────── */
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--grain-light);
+      background: var(--grain-light);
+    }
+
+    .service-card {
+      background: var(--white);
+      padding: 2.25rem 2rem;
+      transition: background 0.25s;
+      position: relative;
+    }
+    .service-card:hover { background: var(--sand); }
+    .service-card:hover .service-card__arrow { transform: translate(4px, -4px); }
+
+    .service-card__icon {
+      width: 40px; height: 40px;
+      margin-bottom: 1.5rem;
+    }
+    .service-card__icon svg { width: 100%; height: 100%; }
+
+    .service-card__title {
+      font-family: var(--f-display);
+      font-size: 1.35rem;
+      margin-bottom: 0.75rem;
+      color: var(--ink);
+    }
+    .service-card__desc {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+    .service-card__arrow {
+      position: absolute;
+      top: 1.75rem; right: 1.75rem;
+      font-size: 1rem;
+      color: var(--cut);
+      transition: transform 0.2s;
+    }
+
+    /* ── PROCESO ─────────────────────────────────────────── */
+    .process__steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .process__connector {
+      position: absolute;
+      top: 2rem; left: calc(100% / 10);
+      right: calc(100% / 10);
+      height: 1px;
+      background: linear-gradient(to right, var(--grain-light), var(--cut), var(--grain-light));
+      z-index: 0;
+    }
+
+    .process__step {
+      position: relative; z-index: 1;
+      padding: 0 1rem 2rem;
+      text-align: center;
+    }
+    .process__num {
+      width: 4rem; height: 4rem;
+      border: 1px solid var(--grain);
+      background: var(--white);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--f-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--cut);
+      margin: 0 auto 1.5rem;
+    }
+    .process__step-title {
+      font-family: var(--f-display);
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .process__step-desc {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    @media (max-width: 700px) {
+      .process__steps { grid-template-columns: 1fr; }
+      .process__connector { display: none; }
+      .process__step { display: grid; grid-template-columns: 4rem 1fr; gap: 0 1.25rem; text-align: left; align-items: start; }
+      .process__num { margin: 0; }
+      .process__step-title, .process__step-desc { grid-column: 2; }
+    }
+
+    /* ── PROYECTOS ───────────────────────────────────────── */
+    .projects__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1px;
+      background: var(--grain-light);
+    }
+
+    .project-card {
+      background: var(--sand-dark);
+      aspect-ratio: 4/3;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .project-card:first-child {
+      grid-column: 1 / 3;
+      aspect-ratio: unset;
+    }
+    .project-card:nth-child(4) {
+      grid-column: 2 / 4;
+      aspect-ratio: unset;
+    }
+
+    /* wood-grain SVG background per card */
+    .project-card__bg {
+      position: absolute; inset: 0;
+      overflow: hidden;
+    }
+    .project-card__bg svg,
+    .project-card__bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .project-card__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,22,18,0.82) 0%, rgba(26,22,18,0.1) 60%, transparent 100%);
+      transition: background 0.35s;
+    }
+    .project-card:hover .project-card__overlay {
+      background: linear-gradient(to top, rgba(26,22,18,0.92) 0%, rgba(26,22,18,0.4) 60%, rgba(26,22,18,0.1) 100%);
+    }
+
+    .project-card__info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1.5rem;
+      transform: translateY(0);
+    }
+    .project-card__tag {
+      font-family: var(--f-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cut-light);
+      margin-bottom: 0.4rem;
+    }
+    .project-card__name {
+      font-family: var(--f-display);
+      font-size: 1.2rem;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .project-card__dim {
+      font-family: var(--f-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--grain-light);
+      margin-top: 0.4rem;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .project-card:hover .project-card__dim { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 700px) {
+      .projects__grid { grid-template-columns: 1fr; }
+      .project-card:first-child,
+      .project-card:nth-child(4) { grid-column: 1; aspect-ratio: 4/3; }
+    }
+
+    /* ── MATERIALES ──────────────────────────────────────── */
+    .materials__grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1px;
+      background: var(--grain-light);
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 900px) { .materials__grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 500px) { .materials__grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .swatch {
+      background: var(--white);
+      padding: 0;
+      cursor: default;
+      transition: transform 0.2s;
+    }
+    .swatch:hover { transform: scale(1.03); z-index: 1; position: relative; }
+
+    .swatch__color {
+      height: 120px;
+      position: relative;
+    }
+    .swatch__grain {
+      position: absolute; inset: 0;
+      opacity: 0.35;
+    }
+    .swatch__info {
+      padding: 0.85rem 0.85rem 1rem;
+    }
+    .swatch__name {
+      font-family: var(--f-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .swatch__code {
+      font-family: var(--f-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .materials__note {
+      display: flex; gap: 2rem; flex-wrap: wrap;
+      padding: 1.5rem 2rem;
+      border: 1px solid var(--grain-light);
+      background: var(--sand);
+    }
+    .materials__note-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+    }
+    .materials__note-item svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--cut); }
+
+    /* ── TESTIMONIOS ─────────────────────────────────────── */
+    .testimonials__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+    @media (max-width: 700px) { .testimonials__grid { grid-template-columns: 1fr; } }
+
+    .testimonial {
+      padding: 2.5rem 2rem;
+      background: rgba(255,255,255,0.04);
+      border-left: 2px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .testimonial:hover {
+      border-left-color: var(--cut-light);
+      background: rgba(255,255,255,0.07);
+    }
+    .testimonial__stars {
+      color: var(--cut-light);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.25rem;
+    }
+    .testimonial__text {
+      font-family: var(--f-display);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--sand);
+      margin-bottom: 1.5rem;
+    }
+    .testimonial__author {
+      font-family: var(--f-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--grain);
+    }
+
+    /* ── CONTACTO ────────────────────────────────────────── */
+    .contact__layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: start;
+    }
+    @media (max-width: 700px) { .contact__layout { grid-template-columns: 1fr; } }
+
+    .contact__form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .field label {
+      font-family: var(--f-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--grain-light);
+      background: var(--white);
+      color: var(--ink);
+      font-family: var(--f-body);
+      font-size: 0.95rem;
+      border-radius: var(--r);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      appearance: none;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--cut);
+      box-shadow: 0 0 0 3px rgba(139,105,20,0.12);
+    }
+    .field textarea { resize: vertical; min-height: 120px; }
+
+    .contact__meta {
+      display: flex; flex-direction: column; gap: 2rem;
+      padding-top: 1rem;
+    }
+    .contact__meta-block { display: flex; flex-direction: column; gap: 0.3rem; }
+    .contact__meta-label {
+      font-family: var(--f-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .contact__meta-value {
+      font-size: 1rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .contact__meta-value:hover { color: var(--cut); }
+
+    .contact__tags {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--grain-light);
+      border: 1px solid var(--grain-light);
+      margin-top: 1rem;
+    }
+    .contact__tag {
+      background: var(--white);
+      padding: 1rem;
+    }
+    .contact__tag-label {
+      font-family: var(--f-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .contact__tag-value {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    .footer {
+      background: var(--ink);
+      color: var(--grain-light);
+      padding: 3rem 0 2rem;
+    }
+    .footer__inner {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .footer__logo {
+      font-family: var(--f-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .footer__links {
+      display: flex; gap: 2rem; list-style: none; flex-wrap: wrap;
+    }
+    .footer__links a {
+      font-family: var(--f-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--grain);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer__links a:hover { color: var(--white); }
+    .footer__copy {
+      border-top: 1px solid rgba(200,184,154,0.15);
+      padding-top: 1.5rem;
+      font-family: var(--f-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── WHATSAPP FLOAT ──────────────────────────────────── */
+    .wa-float {
+      position: fixed;
+      bottom: 1.75rem; right: 1.75rem;
+      z-index: 200;
+      width: 56px; height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(0,0,0,0.28); }
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ── REVEAL ANIMATIONS ───────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .hero__ticker-inner { animation: none; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="navbar">
-    <a href="#inicio" class="logo">
-      <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 23V3H9V9H23V15H15V23H3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-      </svg>
-      SIMETRÍA CONCE
+<!-- ── NAV ──────────────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#inicio" class="nav__logo">
+      <span class="nav__logo-mark">
+        <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="6" width="14" height="1.2"/>
+          <rect x="6" y="0" width="1.2" height="14"/>
+        </svg>
+      </span>
+      Simetría Conce
     </a>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false">
+    <ul class="nav__links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#materiales">Materiales</a></li>
+      <li><a href="#contacto" class="nav__cta">Cotizar</a></li>
+    </ul>
+    <button class="nav__burger" id="burger" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
   </div>
-</header>
-
-<nav class="menu-overlay" id="menuOverlay">
-  <div class="wrap menu-inner">
-    <div class="menu-links">
-      <a href="#inicio" data-link><span class="num">00</span> Inicio</a>
-      <a href="#servicios" data-link><span class="num">01</span> Servicios</a>
-      <a href="#proceso" data-link><span class="num">02</span> Proceso</a>
-      <a href="#proyectos" data-link><span class="num">03</span> Proyectos</a>
-      <a href="#materiales" data-link><span class="num">04</span> Materiales</a>
-      <a href="#contacto" data-link><span class="num">05</span> Contacto</a>
-    </div>
-    <div class="menu-side">
-      <p>Taller de melamina a medida.<br>Chillán Viejo, Región de Ñuble.</p>
-      <span class="mono">+56 9 0000 0000</span>
-      <span class="mono">hola@simetriaconce.cl</span>
-      <span class="mono">@simetriaconce</span>
-    </div>
-  </div>
 </nav>
 
-<main>
+<nav class="nav__mobile" id="mobileMenu">
+  <a href="#servicios"   onclick="closeMobile()">Servicios</a>
+  <a href="#proceso"     onclick="closeMobile()">Proceso</a>
+  <a href="#proyectos"   onclick="closeMobile()">Proyectos</a>
+  <a href="#materiales"  onclick="closeMobile()">Materiales</a>
+  <a href="#contacto"    onclick="closeMobile()">Cotizar →</a>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero" id="inicio">
-    <div class="wrap">
-      <div class="hero-copy">
-        <span class="eyebrow">Taller de melamina a medida</span>
-        <h1>Muebles cortados<br>al <em>milímetro.</em></h1>
-        <p class="lead">Diseñamos, cortamos y armamos cocinas, closets y muebles a medida. Cada pieza sale del taller con la precisión de un plano y la terminación de una mueblería fina.</p>
-        <div class="cta-row">
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<section class="hero" id="inicio">
+  <div class="hero__cut-line"></div>
+
+  <div class="hero__body">
+    <div class="hero__content">
+      <div class="hero__left">
+        <p class="hero__eyebrow">Taller de melamina a medida</p>
+        <h1 class="hero__h1">
+          Muebles cortados<br>al <em>milímetro.</em>
+        </h1>
+        <p class="hero__desc">
+          Diseñamos, cortamos y armamos cocinas, closets y muebles a medida. Cada pieza sale del taller con la precisión de un plano y la terminación de una mueblería fina.
+        </p>
+        <div class="hero__actions">
           <a href="#contacto" class="btn btn-primary">Pedir cotización</a>
-          <a href="#proyectos" class="btn btn-ghost">Ver proyectos</a>
-        </div>
-        <div class="hero-stats">
-          <div><strong>120+</strong><span>Proyectos entregados</span></div>
-          <div><strong>±1mm</strong><span>Tolerancia de corte</span></div>
-          <div><strong>6</strong><span>Años de taller</span></div>
+          <a href="#proyectos" class="btn btn-secondary">Ver proyectos</a>
         </div>
       </div>
 
-      <div class="diagram-wrap">
-        <svg viewBox="0 0 520 460" xmlns="http://www.w3.org/2000/svg">
-          <!-- back panel -->
-          <rect class="piece" style="--ox:-60px; --oy:-20px; --rot:-6deg; --delay:0s;" x="160" y="90" width="240" height="290" rx="3" fill="#3a2c1c"/>
-          <!-- left side -->
-          <rect class="piece" style="--ox:-90px; --oy:10px; --rot:-10deg; --delay:.12s;" x="140" y="70" width="22" height="330" rx="2" fill="#c9893f"/>
-          <!-- right side -->
-          <rect class="piece" style="--ox:90px; --oy:-10px; --rot:10deg; --delay:.2s;" x="398" y="70" width="22" height="330" rx="2" fill="#c9893f"/>
-          <!-- top -->
-          <rect class="piece" style="--ox:0px; --oy:-90px; --rot:4deg; --delay:.32s;" x="140" y="68" width="280" height="22" rx="2" fill="#e3ad6c"/>
-          <!-- bottom -->
-          <rect class="piece" style="--ox:0px; --oy:90px; --rot:-4deg; --delay:.32s;" x="140" y="378" width="280" height="22" rx="2" fill="#e3ad6c"/>
-          <!-- shelf -->
-          <rect class="piece" style="--ox:-70px; --oy:0px; --rot:3deg; --delay:.46s;" x="170" y="225" width="220" height="10" rx="2" fill="#8a6238"/>
-          <!-- door left -->
-          <rect class="piece" style="--ox:-50px; --oy:60px; --rot:-3deg; --delay:.6s;" x="170" y="110" width="118" height="260" rx="2" fill="#caa06a" opacity="0.96"/>
-          <!-- door right -->
-          <rect class="piece" style="--ox:50px; --oy:60px; --rot:3deg; --delay:.68s;" x="292" y="110" width="118" height="260" rx="2" fill="#caa06a" opacity="0.96"/>
-          <!-- handles -->
-          <rect class="piece" style="--ox:0px; --oy:30px; --rot:0deg; --delay:.85s;" x="280" y="220" width="4" height="36" rx="2" fill="#181209"/>
-          <rect class="piece" style="--ox:0px; --oy:30px; --rot:0deg; --delay:.9s;" x="298" y="220" width="4" height="36" rx="2" fill="#181209"/>
+      <div class="hero__right">
+        <div class="measure-card reveal">
+          <p class="measure-card__label">Tolerancia de corte</p>
+          <div class="measure-card__value">±1<span class="measure-card__unit">mm</span></div>
+          <p class="measure-card__sub">Cada pieza según el plano aprobado, sin estimaciones.</p>
+        </div>
 
-          <!-- dimension lines -->
-          <line class="dim-line" x1="120" y1="68" x2="120" y2="400" />
-          <line class="dim-line" x1="115" y1="68" x2="125" y2="68" />
-          <line class="dim-line" x1="115" y1="400" x2="125" y2="400" />
-          <text class="dim-label" x="92" y="238" transform="rotate(-90 92 238)" text-anchor="middle">180 CM</text>
+        <div class="hero__stats">
+          <div class="stat reveal reveal-delay-1">
+            <div class="stat__n">120+</div>
+            <div class="stat__label">Proyectos entregados</div>
+          </div>
+          <div class="stat reveal reveal-delay-2">
+            <div class="stat__n">6</div>
+            <div class="stat__label">Años de taller</div>
+          </div>
+          <div class="stat reveal reveal-delay-3">
+            <div class="stat__n">7–15</div>
+            <div class="stat__label">Días de fabricación</div>
+          </div>
+          <div class="stat reveal reveal-delay-4">
+            <div class="stat__n">2</div>
+            <div class="stat__label">Regiones de cobertura</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-          <line class="dim-line" x1="140" y1="420" x2="420" y2="420" />
-          <line class="dim-line" x1="140" y1="415" x2="140" y2="425" />
-          <line class="dim-line" x1="420" y1="415" x2="420" y2="425" />
-          <text class="dim-label" x="280" y="440" text-anchor="middle">240 CM</text>
+  <div class="hero__ticker" aria-hidden="true">
+    <div class="hero__ticker-inner">
+      <span>Melamina 18mm</span>
+      <span class="accent">·</span>
+      <span>Cantos de PVC</span>
+      <span class="accent">·</span>
+      <span>Herrajes con freno</span>
+      <span class="accent">·</span>
+      <span>Chillán Viejo</span>
+      <span class="accent">·</span>
+      <span>Ñuble y Biobío</span>
+      <span class="accent">·</span>
+      <span>Cotización sin costo</span>
+      <span class="accent">·</span>
+      <span>Garantía 12 meses</span>
+      <span class="accent">·</span>
+      <span>Melamina 18mm</span>
+      <span class="accent">·</span>
+      <span>Cantos de PVC</span>
+      <span class="accent">·</span>
+      <span>Herrajes con freno</span>
+      <span class="accent">·</span>
+      <span>Chillán Viejo</span>
+      <span class="accent">·</span>
+      <span>Ñuble y Biobío</span>
+      <span class="accent">·</span>
+      <span>Cotización sin costo</span>
+      <span class="accent">·</span>
+      <span>Garantía 12 meses</span>
+      <span class="accent">·</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICIOS ─────────────────────────────────────────── -->
+<section class="section" id="servicios">
+  <div class="container">
+    <div class="section__header">
+      <p class="eyebrow section__eyebrow">Qué hacemos</p>
+      <h2 class="section__title">Cuatro líneas de trabajo, un solo nivel de <em>precisión.</em></h2>
+      <p class="section__desc">Cada mueble se diseña a partir del espacio real, no de un catálogo. Medimos, dibujamos el plano de corte y fabricamos en taller.</p>
+    </div>
+
+    <div class="services__grid">
+
+      <div class="service-card reveal">
+        <div class="service-card__icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="24" width="32" height="4" fill="#8b6914"/>
+            <rect x="4" y="12" width="14" height="10" fill="#c8b89a"/>
+            <rect x="22" y="8" width="14" height="14" fill="#c8b89a"/>
+            <rect x="4" y="28" width="4" height="8" fill="#3d352d"/>
+            <rect x="32" y="28" width="4" height="8" fill="#3d352d"/>
+          </svg>
+        </div>
+        <span class="service-card__arrow">↗</span>
+        <h3 class="service-card__title">Cocinas a medida</h3>
+        <p class="service-card__desc">Muebles altos, bajos y de isla, optimizados para tu espacio y tus electrodomésticos.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-card__icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="10" height="32" fill="#c8b89a"/>
+            <rect x="16" y="4" width="10" height="32" fill="#8b6914" opacity="0.5"/>
+            <rect x="28" y="4" width="8" height="32" fill="#c8b89a"/>
+            <rect x="4" y="18" width="32" height="2" fill="#8b6914"/>
+          </svg>
+        </div>
+        <span class="service-card__arrow">↗</span>
+        <h3 class="service-card__title">Closets y placares</h3>
+        <p class="service-card__desc">Walk-in, empotrados o modulares, con distribución interior pensada para tu ropa.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-card__icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="28" width="36" height="4" fill="#8b6914"/>
+            <rect x="2" y="12" width="36" height="4" fill="#c8b89a"/>
+            <rect x="2" y="20" width="36" height="4" fill="#c8b89a"/>
+            <rect x="2" y="28" width="3" height="8" fill="#3d352d"/>
+            <rect x="35" y="28" width="3" height="8" fill="#3d352d"/>
+          </svg>
+        </div>
+        <span class="service-card__arrow">↗</span>
+        <h3 class="service-card__title">Muebles de living</h3>
+        <p class="service-card__desc">Racks, modulares de TV y bibliotecas que se adaptan al largo exacto de tu muro.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-card__icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="26" width="20" height="3" fill="#8b6914"/>
+            <rect x="24" y="14" width="12" height="15" fill="#c8b89a"/>
+            <rect x="4" y="29" width="3" height="7" fill="#3d352d"/>
+            <rect x="21" y="29" width="3" height="7" fill="#3d352d"/>
+            <rect x="4" y="20" width="20" height="4" fill="#c8b89a"/>
+          </svg>
+        </div>
+        <span class="service-card__arrow">↗</span>
+        <h3 class="service-card__title">Home office</h3>
+        <p class="service-card__desc">Escritorios y muebles de oficina con pasacables, cajones y repisas integradas.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESO ───────────────────────────────────────────── -->
+<section class="section section--alt" id="proceso">
+  <div class="container">
+    <div class="section__header">
+      <p class="eyebrow section__eyebrow">Cómo trabajamos</p>
+      <h2 class="section__title">De la medida al mueble <em>instalado.</em></h2>
+      <p class="section__desc">Un proceso de cinco pasos, igual para una repisa que para una cocina completa.</p>
+    </div>
+
+    <div class="process__steps reveal">
+      <div class="process__connector"></div>
+
+      <div class="process__step">
+        <div class="process__num">01</div>
+        <h3 class="process__step-title">Medición</h3>
+        <p class="process__step-desc">Visitamos tu espacio y tomamos las medidas exactas, sin estimaciones.</p>
+      </div>
+      <div class="process__step">
+        <div class="process__num">02</div>
+        <h3 class="process__step-title">Diseño</h3>
+        <p class="process__step-desc">Armamos el plano de corte: distribución, melamina, colores y herrajes.</p>
+      </div>
+      <div class="process__step">
+        <div class="process__num">03</div>
+        <h3 class="process__step-title">Corte</h3>
+        <p class="process__step-desc">Cada pieza se corta en taller al milímetro, según el plano aprobado.</p>
+      </div>
+      <div class="process__step">
+        <div class="process__num">04</div>
+        <h3 class="process__step-title">Armado</h3>
+        <p class="process__step-desc">Ensamblamos y revisamos cada calce antes de salir del taller.</p>
+      </div>
+      <div class="process__step">
+        <div class="process__num">05</div>
+        <h3 class="process__step-title">Instalación</h3>
+        <p class="process__step-desc">Instalamos en tu casa y dejamos el espacio listo para usar el mismo día.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROYECTOS ─────────────────────────────────────────── -->
+<section class="section" id="proyectos">
+  <div class="container">
+    <div class="section__header">
+      <p class="eyebrow section__eyebrow">Trabajos recientes</p>
+      <h2 class="section__title">Proyectos hechos a <em>medida.</em></h2>
+      <p class="section__desc">Una muestra de lo último que salió del taller, con sus dimensiones reales.</p>
+    </div>
+  </div>
+
+  <div style="max-width:var(--max-w); margin:0 auto; padding:0 clamp(1.25rem,5vw,3rem);">
+    <div class="projects__grid">
+
+      <!-- Card 1: wide -->
+      <div class="project-card reveal">
+        <div class="project-card__bg">
+          <img src="img/WhatsApp Image 2026-06-23 at 12.23.51 PM.jpeg" alt="Cocina con isla en roble claro" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="project-card__overlay"></div>
+        <div class="project-card__info">
+          <p class="project-card__tag">Cocina</p>
+          <h3 class="project-card__name">Cocina con isla</h3>
+          <p class="project-card__dim">Roble claro · mesón granito</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-card__bg">
+          <img src="img/WhatsApp Image 2026-06-23 at 12.23.49 PM.jpeg" alt="Cocina verde salvia con isla móvil" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="project-card__overlay"></div>
+        <div class="project-card__info">
+          <p class="project-card__tag">Cocina</p>
+          <h3 class="project-card__name">Cocina verde salvia</h3>
+          <p class="project-card__dim">Bicolor · isla con ruedas</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-card__bg">
+          <img src="img/WhatsApp Image 2026-06-23 at 12.23.43 PM.jpeg" alt="Cocina verde con repisas abiertas" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="project-card__overlay"></div>
+        <div class="project-card__info">
+          <p class="project-card__tag">Cocina</p>
+          <h3 class="project-card__name">Cocina con repisas</h3>
+          <p class="project-card__dim">Verde + nogal · repisas abiertas</p>
+        </div>
+      </div>
+
+      <!-- Card 4: wide -->
+      <div class="project-card reveal">
+        <div class="project-card__bg">
+          <img src="img/WhatsApp Image 2026-06-23 at 12.06.11 PM.jpeg" alt="Cocina moderna con LED bajo muebles" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="project-card__overlay"></div>
+        <div class="project-card__info">
+          <p class="project-card__tag">Cocina</p>
+          <h3 class="project-card__name">Cocina con iluminación LED</h3>
+          <p class="project-card__dim">Gris oscuro · salpicadero mármol</p>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-card__bg">
+          <img src="img/WhatsApp Image 2026-06-23 at 12.21.12 PM.jpeg" alt="Cocina minimalista blanca con mesón madera" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="project-card__overlay"></div>
+        <div class="project-card__info">
+          <p class="project-card__tag">Cocina</p>
+          <h3 class="project-card__name">Cocina blanca minimalista</h3>
+          <p class="project-card__dim">Blanco · mesón madera natural</p>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-card__bg">
+          <img src="img/WhatsApp Image 2026-06-23 at 12.23.41 PM.jpeg" alt="Cocina gris bicolor con horno empotrado" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="project-card__overlay"></div>
+        <div class="project-card__info">
+          <p class="project-card__tag">Cocina</p>
+          <h3 class="project-card__name">Cocina gris bicolor</h3>
+          <p class="project-card__dim">Gris claro + oscuro · horno empotrado</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── MATERIALES ────────────────────────────────────────── -->
+<section class="section section--alt" id="materiales">
+  <div class="container">
+    <div class="section__header">
+      <p class="eyebrow section__eyebrow">Materiales</p>
+      <h2 class="section__title">Melaminas y terminaciones <em>disponibles.</em></h2>
+      <p class="section__desc">Trabajamos con melamina de 15 y 18mm, cantos de PVC y herrajes de corredera con freno.</p>
+    </div>
+
+    <div class="materials__grid reveal">
+
+      <!-- Blanco Nube -->
+      <div class="swatch">
+        <div class="swatch__color" style="background:#f0ede8;">
+          <svg class="swatch__grain" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice">
+            <filter id="g1"><feTurbulence baseFrequency="0.65" numOctaves="3" seed="1"/><feColorMatrix type="saturate" values="0"/></filter>
+            <rect width="200" height="120" filter="url(#g1)" opacity="0.08"/>
+          </svg>
+        </div>
+        <div class="swatch__info">
+          <p class="swatch__name">Blanco Nube</p>
+          <p class="swatch__code">BN-100</p>
+        </div>
+      </div>
+
+      <!-- Roble Natural -->
+      <div class="swatch">
+        <div class="swatch__color" style="background:#c8a060;">
+          <svg class="swatch__grain" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice">
+            <filter id="g2"><feTurbulence type="turbulence" baseFrequency="0.02 0.5" numOctaves="2" seed="5"/><feColorMatrix type="matrix" values="0.5 0 0 0 0.4  0.3 0 0 0 0.25  0 0 0 0 0  0 0 0 0.4 0"/></filter>
+            <rect width="200" height="120" filter="url(#g2)" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="swatch__info">
+          <p class="swatch__name">Roble Natural</p>
+          <p class="swatch__code">RN-214</p>
+        </div>
+      </div>
+
+      <!-- Wengué -->
+      <div class="swatch">
+        <div class="swatch__color" style="background:#3d2a1a;">
+          <svg class="swatch__grain" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice">
+            <filter id="g3"><feTurbulence type="turbulence" baseFrequency="0.02 0.6" numOctaves="2" seed="12"/><feColorMatrix type="matrix" values="0.3 0 0 0 0.3  0.2 0 0 0 0.15  0.1 0 0 0 0.05  0 0 0 0.5 0"/></filter>
+            <rect width="200" height="120" filter="url(#g3)" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="swatch__info">
+          <p class="swatch__name">Wengué</p>
+          <p class="swatch__code">WG-330</p>
+        </div>
+      </div>
+
+      <!-- Gris Cemento -->
+      <div class="swatch">
+        <div class="swatch__color" style="background:#8a8a82;">
+          <svg class="swatch__grain" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice">
+            <filter id="g4"><feTurbulence baseFrequency="0.8" numOctaves="4" seed="3"/><feColorMatrix type="saturate" values="0"/></filter>
+            <rect width="200" height="120" filter="url(#g4)" opacity="0.15"/>
+          </svg>
+        </div>
+        <div class="swatch__info">
+          <p class="swatch__name">Gris Cemento</p>
+          <p class="swatch__code">GC-410</p>
+        </div>
+      </div>
+
+      <!-- Nogal Oscuro -->
+      <div class="swatch">
+        <div class="swatch__color" style="background:#5c3d20;">
+          <svg class="swatch__grain" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice">
+            <filter id="g5"><feTurbulence type="turbulence" baseFrequency="0.015 0.55" numOctaves="3" seed="8"/><feColorMatrix type="matrix" values="0.4 0 0 0 0.25  0.2 0 0 0 0.12  0.1 0 0 0 0  0 0 0 0.5 0"/></filter>
+            <rect width="200" height="120" filter="url(#g5)" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="swatch__info">
+          <p class="swatch__name">Nogal Oscuro</p>
+          <p class="swatch__code">NO-512</p>
+        </div>
+      </div>
+
+      <!-- Arena -->
+      <div class="swatch">
+        <div class="swatch__color" style="background:#d4bf98;">
+          <svg class="swatch__grain" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice">
+            <filter id="g6"><feTurbulence baseFrequency="0.7" numOctaves="3" seed="15"/><feColorMatrix type="saturate" values="0.2"/></filter>
+            <rect width="200" height="120" filter="url(#g6)" opacity="0.12"/>
+          </svg>
+        </div>
+        <div class="swatch__info">
+          <p class="swatch__name">Arena</p>
+          <p class="swatch__code">AR-118</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="materials__note reveal">
+      <div class="materials__note-item">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="2" width="12" height="12" rx="1"/>
+          <line x1="2" y1="8" x2="14" y2="8"/>
         </svg>
+        Espesores 15mm y 18mm disponibles
       </div>
-    </div>
-  </section>
-
-  <!-- SERVICIOS -->
-  <section class="services" id="servicios">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Qué hacemos</span>
-          <h2>Cuatro líneas de trabajo, un solo nivel de precisión.</h2>
-        </div>
-        <p class="sub">Cada mueble se diseña a partir del espacio real, no de un catálogo. Medimos, dibujamos el plano de corte y fabricamos en taller.</p>
-      </div>
-
-      <div class="service-grid reveal">
-        <div class="service-card">
-          <svg class="ico" viewBox="0 0 38 38" fill="none"><rect x="3" y="14" width="32" height="20" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 14L9 4H29L35 14" stroke="currentColor" stroke-width="1.6"/><line x1="11" y1="22" x2="27" y2="22" stroke="currentColor" stroke-width="1.6"/></svg>
-          <h3>Cocinas a medida</h3>
-          <p>Muebles altos, bajos y de isla, optimizados para tu espacio y tus electrodomésticos.</p>
-        </div>
-        <div class="service-card">
-          <svg class="ico" viewBox="0 0 38 38" fill="none"><rect x="5" y="4" width="28" height="30" rx="1.5" stroke="currentColor" stroke-width="1.6"/><line x1="19" y1="4" x2="19" y2="34" stroke="currentColor" stroke-width="1.6"/><circle cx="15" cy="19" r="1.4" fill="currentColor"/><circle cx="23" cy="19" r="1.4" fill="currentColor"/></svg>
-          <h3>Closets y placares</h3>
-          <p>Walk-in, empotrados o modulares, con distribución interior pensada para tu ropa.</p>
-        </div>
-        <div class="service-card">
-          <svg class="ico" viewBox="0 0 38 38" fill="none"><rect x="4" y="10" width="30" height="22" rx="1.5" stroke="currentColor" stroke-width="1.6"/><line x1="4" y1="18" x2="34" y2="18" stroke="currentColor" stroke-width="1.6"/><line x1="14" y1="10" x2="14" y2="18" stroke="currentColor" stroke-width="1.6"/><line x1="24" y1="10" x2="24" y2="18" stroke="currentColor" stroke-width="1.6"/></svg>
-          <h3>Muebles de living</h3>
-          <p>Racks, modulares de TV y bibliotecas que se adaptan al largo exacto de tu muro.</p>
-        </div>
-        <div class="service-card">
-          <svg class="ico" viewBox="0 0 38 38" fill="none"><rect x="6" y="6" width="26" height="26" rx="1.5" stroke="currentColor" stroke-width="1.6"/><line x1="6" y1="14" x2="32" y2="14" stroke="currentColor" stroke-width="1.6"/><line x1="13" y1="20" x2="25" y2="20" stroke="currentColor" stroke-width="1.6"/><line x1="13" y1="25" x2="21" y2="25" stroke="currentColor" stroke-width="1.6"/></svg>
-          <h3>Home office</h3>
-          <p>Escritorios y muebles de oficina con pasacables, cajones y repisas integradas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESO -->
-  <section id="proceso">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Cómo trabajamos</span>
-          <h2>De la medida al mueble instalado.</h2>
-        </div>
-        <p class="sub">Un proceso de cinco pasos, igual para una repisa que para una cocina completa.</p>
-      </div>
-
-      <div class="process-list reveal">
-        <div class="process-item">
-          <span class="pnum">01</span>
-          <h3>Medición</h3>
-          <p>Visitamos tu espacio y tomamos las medidas exactas, sin estimaciones.</p>
-        </div>
-        <div class="process-item">
-          <span class="pnum">02</span>
-          <h3>Diseño</h3>
-          <p>Armamos el plano de corte: distribución, melamina, colores y herrajes.</p>
-        </div>
-        <div class="process-item">
-          <span class="pnum">03</span>
-          <h3>Corte</h3>
-          <p>Cada pieza se corta en taller al milímetro, según el plano aprobado.</p>
-        </div>
-        <div class="process-item">
-          <span class="pnum">04</span>
-          <h3>Armado</h3>
-          <p>Ensamblamos y revisamos cada calce antes de salir del taller.</p>
-        </div>
-        <div class="process-item">
-          <span class="pnum">05</span>
-          <h3>Instalación</h3>
-          <p>Instalamos en tu casa y dejamos el espacio listo para usar el mismo día.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROYECTOS -->
-  <section id="proyectos">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Trabajos recientes</span>
-          <h2>Proyectos hechos a medida.</h2>
-        </div>
-        <p class="sub">Una muestra de lo último que salió del taller, con sus dimensiones reales.</p>
-      </div>
-
-      <div class="gallery reveal">
-        <div class="project-card">
-          <div class="swatch sw1"></div><div class="grain"></div>
-          <span class="tag">Cocina</span>
-          <div class="meta"><h3>Cocina lineal</h3><span>320×60×85 CM · CHILLÁN VIEJO</span></div>
-        </div>
-        <div class="project-card">
-          <div class="swatch sw2"></div><div class="grain"></div>
-          <span class="tag">Closet</span>
-          <div class="meta"><h3>Walk-in modular</h3><span>240×60×240 CM · CONCEPCIÓN</span></div>
-        </div>
-        <div class="project-card">
-          <div class="swatch sw3"></div><div class="grain"></div>
-          <span class="tag">Living</span>
-          <div class="meta"><h3>Rack flotante</h3><span>280×35×45 CM · LOS ÁNGELES</span></div>
-        </div>
-        <div class="project-card">
-          <div class="swatch sw4"></div><div class="grain"></div>
-          <span class="tag">Oficina</span>
-          <div class="meta"><h3>Escritorio en L</h3><span>160×140×75 CM · CHILLÁN</span></div>
-        </div>
-        <div class="project-card">
-          <div class="swatch sw5"></div><div class="grain"></div>
-          <span class="tag">Closet</span>
-          <div class="meta"><h3>Placar empotrado</h3><span>200×60×230 CM · CHILLÁN VIEJO</span></div>
-        </div>
-        <div class="project-card">
-          <div class="swatch sw6"></div><div class="grain"></div>
-          <span class="tag">Cocina</span>
-          <div class="meta"><h3>Cocina en U</h3><span>380×60×85 CM · TALCAHUANO</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MATERIALES -->
-  <section class="materials" id="materiales">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Materiales</span>
-          <h2>Melaminas y terminaciones disponibles.</h2>
-        </div>
-        <p class="sub">Trabajamos con melamina de 15 y 18mm, cantos de PVC y herrajes de corredera con freno.</p>
-      </div>
-
-      <div class="mat-grid reveal">
-        <div class="mat-chip"><div class="swatch sw2"></div><div class="name">Blanco Nube</div><div class="code">BN-100</div></div>
-        <div class="mat-chip"><div class="swatch sw1"></div><div class="name">Roble Natural</div><div class="code">RN-214</div></div>
-        <div class="mat-chip"><div class="swatch sw3"></div><div class="name">Wengué</div><div class="code">WG-330</div></div>
-        <div class="mat-chip"><div class="swatch sw4"></div><div class="name">Gris Cemento</div><div class="code">GC-410</div></div>
-        <div class="mat-chip"><div class="swatch sw5"></div><div class="name">Nogal Oscuro</div><div class="code">NO-512</div></div>
-        <div class="mat-chip"><div class="swatch sw6"></div><div class="name">Arena</div><div class="code">AR-118</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIOS -->
-  <section id="testimonios">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Clientes</span>
-          <h2>Lo que dicen después de la instalación.</h2>
-        </div>
-      </div>
-      <div class="testi-grid reveal">
-        <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p>Pedí una cocina completa y calzó perfecto al primer intento. Se nota el plano de corte hecho con medidas reales, no de catálogo.</p>
-          <div class="who">MARÍA J. — CHILLÁN VIEJO</div>
-        </div>
-        <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p>El closet quedó mejor de lo que imaginé. Aprovecharon cada centímetro del rincón que tenía botado hace años.</p>
-          <div class="who">FELIPE R. — CONCEPCIÓN</div>
-        </div>
-        <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p>Cumplieron el plazo, instalaron en un día y dejaron todo limpio. El mueble de living se ve de mueblería, no de taller.</p>
-          <div class="who">CONSTANZA P. — LOS ÁNGELES</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACTO -->
-  <section class="contact" id="contacto">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Cotización</span>
-          <h2>Contanos qué mueble necesitás.</h2>
-        </div>
-        <p class="sub">Respondemos por WhatsApp en menos de 24 horas con un rango de precio y fecha de visita.</p>
-      </div>
-
-      <div class="contact-grid reveal">
-        <form id="quoteForm">
-          <div class="field">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" type="text" placeholder="Tu nombre" required>
-          </div>
-          <div class="field">
-            <label for="telefono">Teléfono</label>
-            <input id="telefono" type="tel" placeholder="+56 9 ...." required>
-          </div>
-          <div class="field">
-            <label for="tipo">Tipo de mueble</label>
-            <select id="tipo">
-              <option>Cocina</option>
-              <option>Closet / Placar</option>
-              <option>Mueble de living</option>
-              <option>Home office</option>
-              <option>Otro</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="mensaje">Contanos las medidas o adjuntá una idea</label>
-            <textarea id="mensaje" placeholder="Ej: cocina de 3 metros lineales, comuna de Chillán Viejo..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Enviar por WhatsApp</button>
-        </form>
-
-        <div class="contact-info">
-          <div>
-            <div class="info-block">
-              <span class="eyebrow">Whatsapp</span>
-              <a href="https://wa.me/56900000000" target="_blank" rel="noopener">+56 9 0000 0000</a>
-            </div>
-            <div class="info-block">
-              <span class="eyebrow">Correo</span>
-              <a href="mailto:hola@simetriaconce.cl">hola@simetriaconce.cl</a>
-            </div>
-            <div class="info-block">
-              <span class="eyebrow">Instagram</span>
-              <a href="#">@simetriaconce</a>
-            </div>
-            <div class="info-block">
-              <span class="eyebrow">Taller</span>
-              <p>Chillán Viejo, Región de Ñuble</p>
-              <p class="small">Visitas con cita previa</p>
-            </div>
-          </div>
-
-          <div class="info-card">
-            <div class="dim"><span>Cotización</span><b>SIN COSTO</b></div>
-            <div class="dim"><span>Tiempo de fabricación</span><b>7–15 DÍAS</b></div>
-            <div class="dim"><span>Garantía</span><b>12 MESES</b></div>
-            <div class="dim"><span>Zona de instalación</span><b>ÑUBLE Y BIOBÍO</b></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="wrap">
-    <div class="footer-top">
-      <a href="#inicio" class="logo">
-        <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 23V3H9V9H23V15H15V23H3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <div class="materials__note-item">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5">
+          <path d="M2 14 L14 2"/>
+          <path d="M2 8 C6 8 10 4 14 4" stroke-linecap="round"/>
         </svg>
-        SIMETRÍA CONCE
-      </a>
-      <nav class="footer-nav">
-        <a href="#servicios">Servicios</a>
-        <a href="#proceso">Proceso</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#materiales">Materiales</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
+        Cantos de PVC en todos los colores
+      </div>
+      <div class="materials__note-item">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5">
+          <circle cx="8" cy="8" r="5"/>
+          <line x1="8" y1="4" x2="8" y2="8"/>
+          <line x1="8" y1="8" x2="11" y2="10"/>
+        </svg>
+        Herrajes de corredera con freno
+      </div>
+      <div class="materials__note-item">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5">
+          <path d="M8 2 L10 6 L14 6 L11 9 L12 13 L8 11 L4 13 L5 9 L2 6 L6 6 Z"/>
+        </svg>
+        Garantía de 12 meses en herrajes
+      </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 SIMETRÍA CONCE · MUEBLES EN MELAMINA</span>
-      <span>HECHO EN CHILLÁN VIEJO, CHILE</span>
+  </div>
+</section>
+
+<!-- ── TESTIMONIOS ────────────────────────────────────────── -->
+<section class="section section--dark" id="testimonios">
+  <div class="container">
+    <div class="section__header">
+      <p class="eyebrow section__eyebrow" style="color:var(--grain);">Clientes</p>
+      <h2 class="section__title">Lo que dicen después de la <em>instalación.</em></h2>
     </div>
+    <div class="testimonials__grid">
+      <div class="testimonial reveal">
+        <p class="testimonial__stars">★★★★★</p>
+        <p class="testimonial__text">"Pedí una cocina completa y calzó perfecto al primer intento. Se nota el plano de corte hecho con medidas reales, no de catálogo."</p>
+        <p class="testimonial__author">María J. — Chillán Viejo</p>
+      </div>
+      <div class="testimonial reveal reveal-delay-1">
+        <p class="testimonial__stars">★★★★★</p>
+        <p class="testimonial__text">"El closet quedó mejor de lo que imaginé. Aprovecharon cada centímetro del rincón que tenía botado hace años."</p>
+        <p class="testimonial__author">Felipe R. — Concepción</p>
+      </div>
+      <div class="testimonial reveal reveal-delay-2">
+        <p class="testimonial__stars">★★★★★</p>
+        <p class="testimonial__text">"Cumplieron el plazo, instalaron en un día y dejaron todo limpio. El mueble de living se ve de mueblería, no de taller."</p>
+        <p class="testimonial__author">Constanza P. — Los Ángeles</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACTO ──────────────────────────────────────────── -->
+<section class="section" id="contacto">
+  <div class="container">
+    <div class="section__header">
+      <p class="eyebrow section__eyebrow">Cotización</p>
+      <h2 class="section__title">Contanos qué mueble <em>necesitás.</em></h2>
+      <p class="section__desc">Respondemos por WhatsApp en menos de 24 horas con un rango de precio y fecha de visita.</p>
+    </div>
+
+    <div class="contact__layout">
+      <form class="contact__form" id="contactForm">
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+        </div>
+        <div class="field">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" placeholder="+56 9 XXXX XXXX" required />
+        </div>
+        <div class="field">
+          <label for="tipo">Tipo de mueble</label>
+          <select id="tipo" name="tipo" required>
+            <option value="" disabled selected>Seleccioná una opción</option>
+            <option value="Cocina">Cocina</option>
+            <option value="Closet / Placar">Closet / Placar</option>
+            <option value="Mueble de living">Mueble de living</option>
+            <option value="Home office">Home office</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="detalle">Medidas o detalle</label>
+          <textarea id="detalle" name="detalle" placeholder="Contanos las medidas o adjuntá una idea..." rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; font-size:0.78rem; padding:1rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+          Enviar por WhatsApp
+        </button>
+      </form>
+
+      <div class="contact__meta reveal">
+        <div class="contact__meta-block">
+          <p class="contact__meta-label">WhatsApp</p>
+          <a href="https://wa.me/56900000000" class="contact__meta-value">+56 9 0000 0000</a>
+        </div>
+        <div class="contact__meta-block">
+          <p class="contact__meta-label">Correo</p>
+          <a href="mailto:hola@simetriaconce.cl" class="contact__meta-value">hola@simetriaconce.cl</a>
+        </div>
+        <div class="contact__meta-block">
+          <p class="contact__meta-label">Instagram</p>
+          <a href="#" class="contact__meta-value">@simetriaconce</a>
+        </div>
+        <div class="contact__meta-block">
+          <p class="contact__meta-label">Taller</p>
+          <p class="contact__meta-value">Chillán Viejo, Región de Ñuble</p>
+          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.2rem;">Visitas con cita previa</p>
+        </div>
+
+        <div class="contact__tags">
+          <div class="contact__tag">
+            <p class="contact__tag-label">Cotización</p>
+            <p class="contact__tag-value">Sin costo</p>
+          </div>
+          <div class="contact__tag">
+            <p class="contact__tag-label">Fabricación</p>
+            <p class="contact__tag-value">7–15 días</p>
+          </div>
+          <div class="contact__tag">
+            <p class="contact__tag-label">Garantía</p>
+            <p class="contact__tag-value">12 meses</p>
+          </div>
+          <div class="contact__tag">
+            <p class="contact__tag-label">Cobertura</p>
+            <p class="contact__tag-value">Ñuble y Biobío</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <span class="footer__logo">Simetría Conce</span>
+      <ul class="footer__links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#materiales">Materiales</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <p class="footer__copy">© 2026 Simetría Conce · Muebles en melamina · Hecho en Chillán Viejo, Chile</p>
   </div>
 </footer>
 
-<script>
-  // Hamburger menu toggle
-  const hamburgerBtn = document.getElementById('hamburgerBtn');
-  const menuOverlay = document.getElementById('menuOverlay');
+<!-- ── WHATSAPP FLOTANTE ──────────────────────────────────── -->
+<a href="https://wa.me/56900000000?text=Hola%2C%20quiero%20pedir%20una%20cotizaci%C3%B3n." class="wa-float" aria-label="Contactar por WhatsApp" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+</a>
 
-  function toggleMenu(forceClose){
-    const isOpen = hamburgerBtn.classList.contains('open');
-    const shouldOpen = forceClose ? false : !isOpen;
-    hamburgerBtn.classList.toggle('open', shouldOpen);
-    menuOverlay.classList.toggle('open', shouldOpen);
-    hamburgerBtn.setAttribute('aria-expanded', shouldOpen);
-    document.body.style.overflow = shouldOpen ? 'hidden' : '';
+<!-- ── JS ─────────────────────────────────────────────────── -->
+<script>
+  // NAV scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+    burger.classList.remove('open');
+    document.body.style.overflow = '';
   }
 
-  hamburgerBtn.addEventListener('click', () => toggleMenu());
-  document.querySelectorAll('[data-link]').forEach(link => {
-    link.addEventListener('click', () => toggleMenu(true));
-  });
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') toggleMenu(true);
-  });
-
   // Scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
       }
     });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el => io.observe(el));
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
 
-  // Quote form -> WhatsApp
-  const form = document.getElementById('quoteForm');
-  form.addEventListener('submit', (e) => {
+  // Contact form → WhatsApp
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const nombre = document.getElementById('nombre').value;
-    const telefono = document.getElementById('telefono').value;
-    const tipo = document.getElementById('tipo').value;
-    const mensaje = document.getElementById('mensaje').value;
-    const text = `Hola SIMETRÍA CONCE, soy ${nombre} (${telefono}). Quiero cotizar: ${tipo}. ${mensaje}`;
-    const url = `https://wa.me/56900000000?text=${encodeURIComponent(text)}`;
+    const nombre  = document.getElementById('nombre').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const tipo    = document.getElementById('tipo').value;
+    const detalle = document.getElementById('detalle').value.trim();
+    const msg = `Hola, soy ${nombre} (${telefono}). Quiero cotizar: *${tipo}*. ${detalle ? 'Detalle: ' + detalle : ''}`;
+    const url = `https://wa.me/56900000000?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
   });
 </script>
-
 </body>
 </html>
